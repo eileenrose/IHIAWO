@@ -1,0 +1,12 @@
+
+Example:
+https://codepen.io/dissimulate/pen/CqIxk
+
+http://www.nathalielawhead.com/candybox/html5-game-tutorial-making-a-platformer-part-1
+
+Resources:
+http://eloquentjavascript.net/15_game.html
+
+http://www.somethinghitme.com/2013/01/09/creating-a-canvas-platformer-tutorial-part-one/
+
+http://www.emanueleferonato.com/2014/01/17/creation-of-an-html5-tile-based-platform-game-with-no-engines-behind-pure-code/
