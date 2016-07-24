@@ -1,0 +1,9 @@
+http://jsfiddle.net/ryanoc/TG2M7/
+
+https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+
+https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Collision_detection
+
+https://msdn.microsoft.com/en-us/library/gg589497(v=vs.85).aspx
+
+https://github.com/jriecken/sat-js
