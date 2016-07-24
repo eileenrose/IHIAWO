@@ -25,7 +25,10 @@ class MainHandler(webapp2.RequestHandler):
         self.response.out.write('<html><body>%s</body></html>' % greeting)
         template = jinja_environment.get_template('startpage.html')
         self.response.out.write(template.render())
-
+class GameHandler(webapp2.RequestHandler):
+    def get(self):
+        
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/game' GameHandler)
 ], debug=True)
