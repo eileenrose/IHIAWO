@@ -2,6 +2,8 @@
 Example:
 https://codepen.io/dissimulate/pen/CqIxk
 
+http://www.nathalielawhead.com/candybox/html5-game-tutorial-making-a-platformer-part-1
+
 Resources:
 http://eloquentjavascript.net/15_game.html
 
