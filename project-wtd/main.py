@@ -31,13 +31,9 @@ class SignInHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            greeting = ('<a href="%s">Sign out</a>' %
-                    (users.create_logout_url('/')))
+            self.redirect(users.create_logout_url('/'))
         else:
-            greeting = ('<a href="%s">Sign in to be registered on the leaderboard</a>.' %
-                        users.create_login_url('/'))
-
-        self.response.out.write('<html><body>%s</body></html>' % greeting)
+            self.redirect(users.create_login_url('/'))
 
 class AddScoreHandler(webapp2.RequestHandler):
     def get(self):
