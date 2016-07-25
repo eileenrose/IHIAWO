@@ -57,6 +57,10 @@ class ScoreHandler(webapp2.RequestHandler):
             self.response.write('<p>%s</p>' % p.name)
             s.put()
 
+class InstructionHandler(webapp2.RequestHandler):
+    def get(self):
+        templateinstructions = jinja_environment.get_template('instructions.html')
+        self.response.out.write(templateinstructions.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
@@ -64,4 +68,5 @@ app = webapp2.WSGIApplication([
     ('/sign', SignInHandler),
     ('/add', AddScoreHandler),
     ('/scores', ScoreHandler),
+    ('/instructions', InstructionHandler),
 ], debug=True)
