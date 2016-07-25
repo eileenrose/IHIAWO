@@ -37,10 +37,11 @@ class SignInHandler(webapp2.RequestHandler):
 
 class AddScoreHandler(webapp2.RequestHandler):
     def get(self):
-        name = self.request.get('name')
+        name = users.get_current_user().nickname()
         user = users.get_current_user()
         score = self.request.get('score')
-        player = Player(name=name, email=user.nickname(), score=score)
+        level = self.request.get('level')
+        player = Player(name=name, email=user.nickname(), score=score, level=level)
         player.put()
         self.redirect('/scores')
 
@@ -50,8 +51,8 @@ class ScoreHandler(webapp2.RequestHandler):
         query = Player.query().order(Player.score)
         player_list = query.fetch()
         for p in player_list:
-            self.response.write('<p>%s</p>' % p.name)
-            s.put()
+            self.response.write('<p>%s: %s, %s</p>' % (p.name, p.level, p.score))
+            p.put()
 
 class InstructionHandler(webapp2.RequestHandler):
     def get(self):
