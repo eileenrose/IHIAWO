@@ -15,7 +15,11 @@ jinja_environment = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template('startpage.html')
+        user = users.get_current_user()
+        if user:
+            template = jinja_environment.get_template('startpage.html')
+        else:
+            template = jinja_environment.get_template('startpagenon.html')
         self.response.out.write(template.render())
 
 class GameHandler(webapp2.RequestHandler):
@@ -42,8 +46,7 @@ class AddScoreHandler(webapp2.RequestHandler):
         score = self.request.get('score')
         player = Player(name=name, email=user.nickname(), score=score)
         player.put()
-        message = '<ul><li>%s, %s</li></ul>' % (name, email)
-        self.response.write(message)
+        self.redirect('/scores')
 
 
 class ScoreHandler(webapp2.RequestHandler):
