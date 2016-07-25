@@ -2,6 +2,15 @@
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 100px;
   text-align: center;
+  border-style: ridge;
+  border-color: red;
+  border-width: 20px;
+  background-color: orange;
+  margin-right: 10%;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  margin-left: 10%;
+  padding: 20px;
 }
 body{
   background-image: url('duckstartpage.jpg');
@@ -14,4 +23,10 @@ h1{
 i{
   color: black;
   font-size: 24px;
+}
+.dropshadow {
+	height: auto;
+	-webkit-box-shadow: -15px 13px 20px 3px rgba(0,0,0,0.91);
+	-moz-box-shadow: -15px 13px 20px 3px rgba(0,0,0,0.91);
+	box-shadow: -15px 13px 20px 3px rgba(0,0,0,0.91);
 }
