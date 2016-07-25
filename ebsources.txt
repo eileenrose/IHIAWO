@@ -4,6 +4,8 @@ https://codepen.io/dissimulate/pen/CqIxk
 
 http://www.nathalielawhead.com/candybox/html5-game-tutorial-making-a-platformer-part-1
 
+https://purplefloyd.wordpress.com/2009/09/11/a-platform-game-written-in-html5/
+
 Resources:
 http://eloquentjavascript.net/15_game.html
 
