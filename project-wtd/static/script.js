@@ -35,9 +35,10 @@ function keyDownHandler(e) {
     else if(e.keyCode = 35) {
         upPressed = true;
         console.log("upPressed")
-        context.clearRect(0,0,canvas.width,canvas.height)
-        currentx += 10;
-        context.drawImage(img, currentx,0);
+        //context.clearRect(0,0,canvas.width,canvas.height)
+        //current += 10;
+        //context.drawImage(img, currentx,0);
+        img.velX +=10;
     }
 }
 function keyUpHandler(e) {
