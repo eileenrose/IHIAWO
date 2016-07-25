@@ -18,11 +18,15 @@ class MainHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             template = jinja_environment.get_template('startpage.html')
-            temp4 = jinja_environment.get_template('scoreboard.html')
-            self.response.out.write(temp4.render())
+            self.response.out.write(template.render())
+            query = Player.query().order(Player.score)
+            player_list = query.fetch()
+            for p in player_list:
+                self.response.write('<br><p style="font-size:28px;font-family:verdana;border-style: outset;border-color: purple;border-width: 10px;background-color: yellow;padding: 10px;margin: 20px;">%s: %s, %s</p>' % (p.name, p.level, p.score))
+                p.put()
         else:
             template = jinja_environment.get_template('startpagenon.html')
-        self.response.out.write(template.render())
+            self.response.out.write(template.render())
 
 class GameHandler(webapp2.RequestHandler):
     def get(self):
@@ -45,16 +49,7 @@ class AddScoreHandler(webapp2.RequestHandler):
         level = self.request.get('level')
         player = Player(name=name, email=user.nickname(), score=score, level=level)
         player.put()
-        self.redirect('/scores')
-
-
-class ScoreHandler(webapp2.RequestHandler):
-    def get(self):
-        query = Player.query().order(Player.score)
-        player_list = query.fetch()
-        for p in player_list:
-            self.response.write('<p>%s: %s, %s</p>' % (p.name, p.level, p.score))
-            p.put()
+        self.redirect('/')
 
 class InstructionHandler(webapp2.RequestHandler):
     def get(self):
@@ -66,6 +61,5 @@ app = webapp2.WSGIApplication([
     ('/game', GameHandler),
     ('/sign', SignInHandler),
     ('/add', AddScoreHandler),
-    ('/scores', ScoreHandler),
     ('/instructions', InstructionHandler),
 ], debug=True)
