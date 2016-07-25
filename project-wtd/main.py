@@ -45,7 +45,7 @@ class AddScoreHandler(webapp2.RequestHandler):
         message = '<ul><li>%s, %s</li></ul>' % (name, email)
         self.response.write(message)
 
-ss
+
 class ScoreHandler(webapp2.RequestHandler):
     def get(self):
         query = Player.query().order(Player.score)
