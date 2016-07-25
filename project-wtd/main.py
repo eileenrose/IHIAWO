@@ -18,6 +18,8 @@ class MainHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             template = jinja_environment.get_template('startpage.html')
+            temp4 = jinja_environment.get_template('scoreboard.html')
+            self.response.out.write(temp4.render())
         else:
             template = jinja_environment.get_template('startpagenon.html')
         self.response.out.write(template.render())
