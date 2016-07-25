@@ -15,3 +15,9 @@ i{
   color: black;
   font-size: 24px;
 }
+.dropshadow {
+	height: auto;
+	-webkit-box-shadow: -15px 13px 20px 3px rgba(0,0,0,0.91);
+	-moz-box-shadow: -15px 13px 20px 3px rgba(0,0,0,0.91);
+	box-shadow: -15px 13px 20px 3px rgba(0,0,0,0.91);
+}
