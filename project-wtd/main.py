@@ -15,7 +15,11 @@ jinja_environment = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template('startpage.html')
+        user = users.get_current_user()
+        if user:
+            template = jinja_environment.get_template('startpage.html')
+        else:
+            template = jinja_environment.get_template('startpagenon.html')
         self.response.out.write(template.render())
 
 class GameHandler(webapp2.RequestHandler):
@@ -27,13 +31,9 @@ class SignInHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            greeting = ('<a href="%s">Sign out</a>' %
-                    (users.create_logout_url('/')))
+            self.redirect(users.create_logout_url('/'))
         else:
-            greeting = ('<a href="%s">Sign in to be registered on the leaderboard</a>.' %
-                        users.create_login_url('/'))
-
-        self.response.out.write('<html><body>%s</body></html>' % greeting)
+            self.redirect(users.create_login_url('/'))
 
 class AddScoreHandler(webapp2.RequestHandler):
     def get(self):
@@ -42,8 +42,7 @@ class AddScoreHandler(webapp2.RequestHandler):
         score = self.request.get('score')
         player = Player(name=name, email=user.nickname(), score=score)
         player.put()
-        message = '<ul><li>%s, %s</li></ul>' % (name, email)
-        self.response.write(message)
+        self.redirect('/scores')
 
 
 class ScoreHandler(webapp2.RequestHandler):
@@ -54,6 +53,10 @@ class ScoreHandler(webapp2.RequestHandler):
             self.response.write('<p>%s</p>' % p.name)
             s.put()
 
+class InstructionHandler(webapp2.RequestHandler):
+    def get(self):
+        templateinstructions = jinja_environment.get_template('instructions.html')
+        self.response.out.write(templateinstructions.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
@@ -61,4 +64,5 @@ app = webapp2.WSGIApplication([
     ('/sign', SignInHandler),
     ('/add', AddScoreHandler),
     ('/scores', ScoreHandler),
+    ('/instructions', InstructionHandler),
 ], debug=True)
