@@ -119,3 +119,6 @@ function duckLocation(){
   scrollWrapper(x,y)
 }
 window.setTimeout(duckLocation, 100);
+
+var audio = new Audio('static/Music.mp3');
+audio.play();
