@@ -55,6 +55,10 @@ class InstructionHandler(webapp2.RequestHandler):
     def get(self):
         templateinstructions = jinja_environment.get_template('instructions.html')
         self.response.out.write(templateinstructions.render())
+class EndOfLevelHandler(webapp2.RequestHandler):
+    def post(self):
+        template = jinja_environment.get_template('end_of_level.html')
+        self.response.out.write(template.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
@@ -62,4 +66,5 @@ app = webapp2.WSGIApplication([
     ('/sign', SignInHandler),
     ('/add', AddScoreHandler),
     ('/instructions', InstructionHandler),
+    ('/end_of_level', EndOfLevelHandler),
 ], debug=True)

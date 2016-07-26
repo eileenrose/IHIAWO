@@ -138,6 +138,7 @@ function keyUpHandler(e) {
     }
 }
 
+<<<<<<< HEAD
 //function scrollWrapper(x, y){
   //  var wrapper = document.getElementById('wrapper');
     //wrapper.scrollTop = x;
@@ -155,3 +156,25 @@ function keyUpHandler(e) {
 //  scrollWrapper(x,y)
 //}
 //window.setTimeout(duckLocation, 100);
+=======
+function scrollWrapper(x, y){
+    var wrapper = document.getElementById('wrapper');
+    wrapper.scrollTop = x;
+    wrapper.scrollLeft = y;
+}
+function duckLocation(){
+  var x = currentx - 100
+  var y = currenty - 100
+  if (x<0){
+    x=0
+  }
+  if (y<0){
+    y=0
+  }
+  scrollWrapper(x,y)
+}
+window.setTimeout(duckLocation, 100);
+
+var audio = new Audio('static/Music.mp3');
+audio.play();
+>>>>>>> 79c3b9ed41dcb1b19b5762d0ad7c18fe71743cbd
