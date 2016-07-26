@@ -9,7 +9,8 @@ duckImage.onload = function () {
 }
 duckImage.src = "static/duck option one.png";
 
-var currentx = 0;
+var currentx = 100;
+var currenty = 100;
 var rightPressed = false;
 var leftPressed = false;
 var upPressed = false; //set to false to begin with since the character shouldn't be moving until we call the function
@@ -23,22 +24,30 @@ function keyDownHandler(e) {
         console.log("rightPressed")
         context.clearRect(0,0,canvas.width,canvas.height)
         currentx += 10;
-        context.drawImage(duckImage, currentx,0);
+        context.drawImage(duckImage, currentx,currenty);
     }
     else if(e.keyCode == 37) {
         leftPressed = true;
         console.log("leftPressed")
         context.clearRect(0,0,canvas.width,canvas.height)
         currentx -= 10;
-        context.drawImage(duckImage, currentx,0);
+        context.drawImage(duckImage, currentx,currenty);
     }
-    else if(e.keyCode = 35) {
+    else if(e.keyCode == 38) {
         upPressed = true;
         console.log("upPressed")
-        //context.clearRect(0,0,canvas.width,canvas.height)
-        //current += 10;
-        //context.drawImage(img, currentx,0);
+        context.clearRect(0,0,canvas.width,canvas.height)
+        currenty -= 10;
+        context.drawImage(duckImage, currentx,currenty);
         duckImage.velX +=10;
+    }
+    else if(e.keyCode == 40){
+      downPressed = true;
+      console.log("downPressed")
+      context.clearRect(0,0,canvas.width,canvas.height)
+      currenty += 10;
+      context.drawImage(duckImage, currentx,currenty);
+      duckImage.velX +=10;
     }
 }
 function keyUpHandler(e) {
@@ -48,8 +57,11 @@ function keyUpHandler(e) {
     else if(e.keyCode == 37) {
         leftPressed = false;
     }
-    else if (e.keyCode == 35) {
+    else if (e.keyCode == 38) {
         upPressed = false;
+    }
+    else if (e.keyCode == 40) {
+        downPressed = false;
     }
 }
 
