@@ -7,7 +7,7 @@ var duckImage = new Image();
 duckImage.onload = function () {
     context.drawImage(duckImage, 100, 100);
 }
-img.src = "static/duck option one.png";
+duckImage.src = "static/duck option one.png";
 
 var currentx = 0;
 var rightPressed = false;
@@ -16,7 +16,7 @@ var upPressed = false; //set to false to begin with since the character shouldn'
 
 document.addEventListener("keydown", keyDownHandler, false); // the next two lines are calling the function. When the keys are pressed
 document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
-}
+
 function keyDownHandler(e) {
     if(e.keyCode == 39) {
         rightPressed = true; //when the right key is pressed, the character will move
