@@ -30,6 +30,16 @@ var upPressed = false; //set to false to begin with since the character shouldn'
 document.addEventListener("keydown", keyDownHandler, false); // the next two lines are calling the function. When the keys are pressed
 document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
 
+function goBackDown(){
+  downPressed = true;
+  console.log("downPressed")
+  //context.clearRect(0,0,canvas.width,canvas.height)
+  context.drawImage(background, backgroundX, 0)
+  context.drawImage(background2, background2X, 0)
+  currenty += 35;
+  context.drawImage(duckImage, currentx, currenty);
+}
+
 function keyDownHandler(e) {
     if(e.keyCode == 39) {
         rightPressed = true; //when the right key is pressed, the character will move
@@ -67,24 +77,11 @@ function keyDownHandler(e) {
         context.clearRect(0,0,canvas.width,canvas.height)
         context.drawImage(background, backgroundX, 0)
         context.drawImage(background2, background2X, 0)
-        if (currenty > 0){
-          currenty -= 35;
-        }
+        currenty -= 35;
         context.drawImage(duckImage, currentx,currenty);
-        duckImage.velX +=10;
+        window.setTimeout(goBackDown(), 10000);
     }
-    else if(e.keyCode == 40){
-      downPressed = true;
-      console.log("downPressed")
-      context.clearRect(0,0,canvas.width,canvas.height)
-      context.drawImage(background, backgroundX, 0)
-      context.drawImage(background2, background2X, 0)
-      if (currenty < 200){
-        currenty += 35;
-      }
-      context.drawImage(duckImage, currentx,currenty);
-      duckImage.velX +=10;
-    }
+
 }
 function keyUpHandler(e) {
     if(e.keyCode == 39) {
@@ -100,6 +97,8 @@ function keyUpHandler(e) {
         downPressed = false;
     }
 }
+
+
 
 function scrollWrapper(x, y){
     var wrapper = document.getElementById('wrapper');
