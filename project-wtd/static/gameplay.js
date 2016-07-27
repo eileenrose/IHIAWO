@@ -1,8 +1,8 @@
+
 var canvas;
 var context;
 var canvasWidth;
 var canvasHeight;
-
 var currentx = 100;
 var currenty = 200;
 var groundy = 200;
@@ -21,6 +21,8 @@ var delay = 50;
 var codeX;
 
 
+var lifebar;
+var numLives = 0;
 
 var background = new Image();
 var background2 = new Image();
@@ -49,7 +51,26 @@ window.onload = function() {
   setupMainObstacle();
   setupListeners();
   setupIntervals();
+  setuplifeBar();
 
+}
+
+function setuplifeBar() {
+//  output = document.getElementById('output');
+//  output.innerHTML = level;
+
+
+  for(var i=0; i<3; i++) addLife();
+}
+
+
+
+function addLife() {
+  lifebar = document.getElementById('lifebar');
+  var life = new Image();
+  life.src='static/duck-lives.png';
+  lifebar.appendChild(life);
+  numLives++;
 }
 
 function setupIntervals(){
