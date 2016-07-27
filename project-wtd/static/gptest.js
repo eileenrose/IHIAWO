@@ -221,6 +221,3 @@ function moveMainObstacle(){
   codeX += 1;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
-
-var audio = new Audio('static/Music.mp3');
-audio.play();
