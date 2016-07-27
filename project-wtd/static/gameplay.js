@@ -1,5 +1,6 @@
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext("2d");
+var m = new MatrixAnimation();
 
 
 var background = new Image();
@@ -82,7 +83,7 @@ function duckLocation(){
 }
 
 function update(){
-    console.log(delay);
+    //console.log(delay);
     if (currenty == groundy && isUpPressed){
       yVelocity = 3;
     }
@@ -96,6 +97,7 @@ function update(){
       yVelocity = 0;
       currenty = groundy;
     }
+
       context.clearRect(0,0,canvas.width,canvas.height);
       context.drawImage(background, backgroundX, 0);
       context.drawImage(background2, background2X, 0);
@@ -118,7 +120,7 @@ function keyDownHandler(e) {
         console.log("leftPressed");
         updateCanvasLeft();
     }
-    if(e.keyCode == 38) {
+    if(e.keyCode == 32) {
         isUpPressed = true;
         console.log("upPressed");
         jumping = true;
@@ -132,13 +134,14 @@ function keyUpHandler(e) {
   if(e.keyCode == 37) {
       isLeftPressed = false;
   }
-  if(e.keyCode == 38) {
+  if(e.keyCode == 32) {
       isUpPressed = false;
     }
 }
 function runningGame(){
   update();
   duckLocation();
+  m.drawImage(context, 0,0,100,400);
 
 }
 window.setInterval(runningGame, delay);
