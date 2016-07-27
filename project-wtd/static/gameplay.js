@@ -1,4 +1,3 @@
-
 var canvas;
 var context;
 var canvasWidth;
@@ -214,12 +213,42 @@ function keyUpHandler(e) {
     }
 
 }
+function getPositions() {
+  var posX = currentx;
+  var posY = currenty;
+  var width = duckImage.width;
+  var height = duckImage.height;
+  return [ [ posX, posX + width ], [ posY, posY + height ] ];
+}
+
+function comparePositionsCode(p1, p2) {
+  // var x1 = p1[0] < p2[0] ? p1 : p2;
+  // var x2 = p1[0] < p2[0] ? p2 : p1;
+  // return x1[1] > x2[0] || x1[0] === x2[0] ? true : false;
+  return p1[0] < p2;
+}
+
+function checkCollisionsCode(){
+  var codePos = [codeX+canvas.width, 400];
+  var pos = getPositions();
+  var horizontalMatch = comparePositionsCode(pos[0], codePos[0]);
+  // var verticalMatch = comparePositions(pos[1], codePos[1]);
+  // var match = horizontalMatch && verticalMatch;
+  var match = horizontalMatch;
+  if (match) { $("body").append("COLLISION!!! "); }
+  // make a new function for collisions with obstacles, code, tub
+}
+
 function runningGame(){
   update();
   duckLocation();
+  checkCollisionsCode();
 
 }
 function moveMainObstacle(){
   codeX += 1;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
+
+var audio = new Audio('static/Music.mp3');
+audio.play();

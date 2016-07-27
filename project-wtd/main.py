@@ -30,7 +30,7 @@ class MainHandler(webapp2.RequestHandler):
 
 class GameHandler(webapp2.RequestHandler):
     def get(self):
-        templategame = jinja_environment.get_template('level1.html')
+        templategame = jinja_environment.get_template('j.html')
         self.response.out.write(templategame.render())
 
 class SignInHandler(webapp2.RequestHandler):
