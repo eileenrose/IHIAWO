@@ -141,7 +141,10 @@ function keyUpHandler(e) {
 function runningGame(){
   update();
   duckLocation();
-  m.drawImage(context, 0,0,100,400);
+  m.drawImage(context, 0,0,50,400);
 
 }
 window.setInterval(runningGame, delay);
+
+var audio = new Audio('static/Music.mp3');
+audio.play();
