@@ -5,10 +5,10 @@ var context = canvas.getContext("2d");
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
-var codeFalling = new Image();
 var duckDistance = 0;
 var buttonCount = 0;
 var myMusic;
+var mX = 0
 
 var m = new MatrixAnimation();
 m.drawImage(context, 0, 0, 40, 40);
@@ -38,14 +38,10 @@ background2.onload = function(){
 duckImage.onload = function () {
     context.drawImage(duckImage, 100, 200);
 }
-codeFalling.onload = function(){
-  context.drawImage(codeFalling, 50,0 )
-}
 
 background.src = "static/background.png";
 background2.src = "static/background.png";
 duckImage.src = "static/duck option one.png";
-codeFalling.src = "static/code falling two.gif";
 
 
 var currentx = 100;
@@ -82,7 +78,6 @@ function keyDownHandler(e) {
         context.drawImage(background, backgroundX, 0)
         context.drawImage(background2, background2X, 0)
         context.drawImage(duckImage, currentx,currenty)
-        context.drawImage(codeFalling,duckDistance, 0)
     }
     else if(e.keyCode == 37) {
         leftPressed = true;
@@ -102,7 +97,6 @@ function keyDownHandler(e) {
         context.clearRect(0,0,canvas.width,canvas.height)
         context.drawImage(background, backgroundX, 0)
         context.drawImage(background2, background2X, 0)
-        context.drawImage(codeFalling, duckDistance, 0)
         if (currenty > 0){
           currenty -= 35;
         }
@@ -115,7 +109,6 @@ function keyDownHandler(e) {
       context.clearRect(0,0,canvas.width,canvas.height)
       context.drawImage(background, backgroundX, 0)
       context.drawImage(background2, background2X, 0)
-      context.drawImage(codeFalling, duckDistance, 0)
       if (currenty < 200){
         currenty += 35;
       }
@@ -136,6 +129,9 @@ function keyUpHandler(e) {
     else if (e.keyCode == 40) {
         downPressed = false;
     }
+}
+function moveCode(){
+  mX += 35
 }
 
 
