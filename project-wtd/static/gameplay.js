@@ -6,6 +6,7 @@ var m = new MatrixAnimation();
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
+
 background.onload = function(){
   context.drawImage(background, 0, 0)
 }
@@ -15,9 +16,12 @@ background2.onload = function(){
 duckImage.onload = function () {
     context.drawImage(duckImage, 100, 200);
 }
+
+
 background.src = "static/background.png";
 background2.src = "static/background.png";
 duckImage.src = "static/duck option one.png";
+lifeBar.src = "static/duck-lives.png";
 
 
 var currentx = 100;

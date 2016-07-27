@@ -1,3 +1,10 @@
 body {
     overflow: hidden;
 }
+
+#lifebar{
+  position: absolute;
+  width: 400px;
+  left: 400px;
+  text-align: right;
+}

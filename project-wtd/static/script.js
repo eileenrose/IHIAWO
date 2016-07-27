@@ -1,17 +1,16 @@
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext("2d");
+var m = new MatrixAnimation();
 
 
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
-var codeFalling = new Image();
-var duckDistance = 0;
-var buttonCount = 0;
+
 var myMusic;
 
-var m = new MatrixAnimation();
-m.drawImage(context, 0, 0, 40, 40);
+
+m.drawImage(context, 0, 0, 80, 400);
 
 function drawMatrix() {
   m.drawImage(context, 0, 0, 40, 40);
@@ -25,9 +24,7 @@ setInterval(drawMatrix, 100);
 //     myGameArea.start();
 // }
 
-//function duckDistance ();
-  //if {rightPressed||leftPressed||upPressed == 5}
-    //print codeFalling(5,0)
+
 
 background.onload = function(){
   context.drawImage(background, 0, 0)
@@ -38,14 +35,10 @@ background2.onload = function(){
 duckImage.onload = function () {
     context.drawImage(duckImage, 100, 200);
 }
-codeFalling.onload = function(){
-  context.drawImage(codeFalling, 50,0 )
-}
 
 background.src = "static/background.png";
 background2.src = "static/background.png";
 duckImage.src = "static/duck option one.png";
-codeFalling.src = "static/code falling two.gif";
 
 
 var currentx = 100;
@@ -62,8 +55,6 @@ document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't 
 
 
 function keyDownHandler(e) {
-    buttonCount +=1
-    duckDistance = buttonCount
     if(e.keyCode == 39) {
         rightPressed = true; //when the right key is pressed, the character will move
         console.log("rightPressed")
@@ -82,7 +73,6 @@ function keyDownHandler(e) {
         context.drawImage(background, backgroundX, 0)
         context.drawImage(background2, background2X, 0)
         context.drawImage(duckImage, currentx,currenty)
-        context.drawImage(codeFalling,duckDistance, 0)
     }
     else if(e.keyCode == 37) {
         leftPressed = true;
@@ -90,7 +80,6 @@ function keyDownHandler(e) {
         context.clearRect(0,0,canvas.width,canvas.height)
         context.drawImage(background, backgroundX, 0)
         context.drawImage(background2, background2X, 0)
-        context.drawImage(codeFalling, duckDistance, 0)
         if (currentx > 0){
           currentx -= 35;
         }
@@ -102,11 +91,10 @@ function keyDownHandler(e) {
         context.clearRect(0,0,canvas.width,canvas.height)
         context.drawImage(background, backgroundX, 0)
         context.drawImage(background2, background2X, 0)
-        context.drawImage(codeFalling, duckDistance, 0)
         if (currenty > 0){
           currenty -= 35;
         }
-        context.drawImage(duckImage, duckDistance,currenty);
+        context.drawImage(duckImage, currentx,currenty);
         duckImage.velX +=10;
     }
     else if(e.keyCode == 40){
@@ -115,7 +103,6 @@ function keyDownHandler(e) {
       context.clearRect(0,0,canvas.width,canvas.height)
       context.drawImage(background, backgroundX, 0)
       context.drawImage(background2, background2X, 0)
-      context.drawImage(codeFalling, duckDistance, 0)
       if (currenty < 200){
         currenty += 35;
       }
