@@ -207,7 +207,7 @@ function checkCollisionsCode(){
   // var verticalMatch = comparePositions(pos[1], codePos[1]);
   // var match = horizontalMatch && verticalMatch;
   var match = horizontalMatch;
-  if (match) { $("body").append("<p>COLLISION !!!</p>"); }
+  if (match) { $("body").append("COLLISION!!! "); }
   // make a new function for collisions with obstacles, code, tub
 }
 
@@ -221,3 +221,6 @@ function moveMainObstacle(){
   codeX += 1;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
+
+var audio = new Audio('static/Music.mp3');
+audio.play();
