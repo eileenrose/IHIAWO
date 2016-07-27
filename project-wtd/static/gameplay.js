@@ -20,6 +20,7 @@ var delay = 50;
 var codeX;
 var myScore;
 var currentScore = 0;
+var recentlyCollided = false;
 
 var lifebar;
 var numLives = 0;
@@ -29,6 +30,7 @@ var background2 = new Image();
 var duckImage = new Image();
 
 window.onload = function() {
+  console.log("loaded window");
   canvas = document.getElementById('canvas');
   context = canvas.getContext("2d");
   canvasWidth = canvas.width;
@@ -54,6 +56,7 @@ window.onload = function() {
   setupIntervals();
   setuplifeBar();
   setupScore();
+  runningGame();
 
 }
 function setuplifeBar() {
@@ -73,12 +76,9 @@ function incrementScore() {
   currentScore += 1;
   scoreDiv = document.getElementById('score');
   scoreDiv.innerHTML = 'Score: ' + currentScore;
+  console.log(currentScore);
 }
 
-function everyinterval(n) {
-    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
-    return false;
-}
 
 function addLife() {
   lifebar = document.getElementById('lifebar');
@@ -91,7 +91,7 @@ function addLife() {
 function removeLife(){
   numLives--;
   var life = lifebar.children;
-  if(numLives>0){
+  if(numLives>=0){
     lifebar.removeChild(lifebar.lastChild);
   }
   else{
@@ -100,6 +100,7 @@ function removeLife(){
 }
 
 function setupIntervals(){
+  console.log("intervals");
   window.setInterval(runningGame, delay);
   window.setInterval(moveMainObstacle, 50);
 }
@@ -157,7 +158,6 @@ function duckLocation(){
 }
 
 function update(){
-    //console.log(delay);
     if (currenty == groundy && isUpPressed){
       yVelocity = 3;
     }
@@ -177,6 +177,7 @@ function update(){
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
 
+      console.log("updating");
       incrementScore();
 }
 
@@ -213,6 +214,10 @@ function keyUpHandler(e) {
     }
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
 function getPositions() {
   var posX = currentx;
   var posY = currenty;
@@ -229,13 +234,28 @@ function comparePositionsCode(p1, p2) {
 }
 
 function checkCollisionsCode(){
+<<<<<<< HEAD
+=======
+  if (recentlyCollided) return;
+>>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
   var codePos = [codeX+canvas.width, 400];
   var pos = getPositions();
   var horizontalMatch = comparePositionsCode(pos[0], codePos[0]);
   // var verticalMatch = comparePositions(pos[1], codePos[1]);
   // var match = horizontalMatch && verticalMatch;
   var match = horizontalMatch;
+<<<<<<< HEAD
   if (match) { $("body").append("COLLISION!!! "); }
+=======
+  if (match) {
+    removeLife();
+    recentlyCollided = true
+    window.setTimeout(function(){
+      recentlyCollided = false;
+    }, 2000);
+  }
+
+>>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
   // make a new function for collisions with obstacles, code, tub
 }
 
@@ -243,12 +263,19 @@ function runningGame(){
   update();
   duckLocation();
   checkCollisionsCode();
+<<<<<<< HEAD
+=======
+  console.log("I'm running");
+>>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
 
 }
 function moveMainObstacle(){
   codeX += 1;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
 var audio = new Audio('static/Music.mp3');
 audio.play();
