@@ -18,19 +18,20 @@ var isUpPressed = false;
 var isRightPressed = false;
 var isLeftPressed = false;
 var delay = 50;
-var codeX = -400;
+var codeX;
+
 
 
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
-var codeImage = new Image();
 
 window.onload = function() {
   canvas = document.getElementById('canvas');
   context = canvas.getContext("2d");
   canvasWidth = canvas.width;
   canvasHeight = canvas.height;
+  codeX = -canvas.width;
 
   background.onload = function(){
     context.drawImage(background, 0, 0)
@@ -73,9 +74,11 @@ function updateCanvasRight(){
     backgroundX = -35;
     background2X = 1788 - 35;
   }
+  codeX -= 2; //makes code move back 
   context.drawImage(background, backgroundX, 0)
   context.drawImage(background2, background2X, 0)
-  context.drawImage(duckImage, currentx,currenty);
+  context.drawImage(duckImage, currentx,currenty)
+  drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
 
 function updateCanvasLeft(){
@@ -167,6 +170,6 @@ function runningGame(){
 
 }
 function moveMainObstacle(){
-  codeX += 10;
+  codeX += 1;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
