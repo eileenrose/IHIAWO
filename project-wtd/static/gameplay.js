@@ -1,29 +1,8 @@
-var canvas = document.getElementById('canvas')
-var context = canvas.getContext("2d");
-var m = new MatrixAnimation();
 
-
-var background = new Image();
-var background2 = new Image();
-var duckImage = new Image();
-
-background.onload = function(){
-  context.drawImage(background, 0, 0)
-}
-background2.onload = function(){
-  context.drawImage(background2, 1788, 0)
-}
-duckImage.onload = function () {
-    context.drawImage(duckImage, 100, 200);
-}
-
-
-background.src = "static/background.png";
-background2.src = "static/background.png";
-duckImage.src = "static/duck option one.png";
-lifeBar.src = "static/duck-lives.png";
-
-
+var canvas;
+var context;
+var canvasWidth;
+var canvasHeight;
 var currentx = 100;
 var currenty = 200;
 var groundy = 200;
@@ -39,10 +18,71 @@ var isUpPressed = false;
 var isRightPressed = false;
 var isLeftPressed = false;
 var delay = 50;
+var codeX = -400;
 
+var lifebar;
+var numLives = 0;
+
+var background = new Image();
+var background2 = new Image();
+var duckImage = new Image();
+var codeImage = new Image();
+
+window.onload = function() {
+  canvas = document.getElementById('canvas');
+  context = canvas.getContext("2d");
+  canvasWidth = canvas.width;
+  canvasHeight = canvas.height;
+
+  background.onload = function(){
+    context.drawImage(background, 0, 0)
+  }
+  background2.onload = function(){
+    context.drawImage(background2, 1788, 0)
+  }
+  duckImage.onload = function () {
+      context.drawImage(duckImage, 100, 200);
+  }
+  background.src = "static/background.png";
+  background2.src = "static/background.png";
+  duckImage.src = "static/duck option one.png";
+
+  setupMainObstacle();
+  setupListeners();
+  setupIntervals();
+  setuplifeBar();
+
+}
+
+function setuplifeBar() {
+//  output = document.getElementById('output');
+//  output.innerHTML = level;
+
+
+  for(var i=0; i<3; i++) addLife();
+}
+
+
+
+function addLife() {
+  lifebar = document.getElementById('lifebar');
+  var life = new Image();
+  life.src='static/duck-lives.png';
+  lifebar.appendChild(life);
+  numLives++;
+}
+
+function setupIntervals(){
+  window.setInterval(runningGame, delay);
+  window.setInterval(moveMainObstacle, 50);
+}
+
+function setupListeners() {
+  document.addEventListener("keydown", keyDownHandler, false); // the next two lines are calling the function. When the keys are pressed
+  document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
+}
 
 function updateCanvasRight(){
-
   context.clearRect(0,0,canvas.width,canvas.height)
   backgroundX -= 35;
   background2X -= 35;
@@ -91,12 +131,12 @@ function update(){
     if (currenty == groundy && isUpPressed){
       yVelocity = 3;
     }
-    console.log(yVelocity);
+    //console.log(yVelocity);
     yVelocity = yVelocity - delay*gravity;
-    console.log(yVelocity);
-    console.log(currenty);
+    //console.log(yVelocity);
+    //console.log(currenty);
     currenty = currenty - yVelocity*delay;
-    console.log(currenty);
+    //console.log(currenty);
     if (currenty >= groundy){
       yVelocity = 0;
       currenty = groundy;
@@ -106,12 +146,8 @@ function update(){
       context.drawImage(background, backgroundX, 0);
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
-
-
-
 }
-document.addEventListener("keydown", keyDownHandler, false); // the next two lines are calling the function. When the keys are pressed
-document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
+
 function keyDownHandler(e) {
     if(e.keyCode == 39) {
         isRightPressed = true; //when the right key is pressed, the character will move
@@ -145,10 +181,9 @@ function keyUpHandler(e) {
 function runningGame(){
   update();
   duckLocation();
-  m.drawImage(context, 0,0,50,400);
 
 }
-window.setInterval(runningGame, delay);
-
-var audio = new Audio('static/Music.mp3');
-audio.play();
+function moveMainObstacle(){
+  codeX += 10;
+  drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
+}

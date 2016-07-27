@@ -58,6 +58,10 @@ class InstructionHandler(webapp2.RequestHandler):
 class EndOfLevelHandler(webapp2.RequestHandler):
     def post(self):
         template = jinja_environment.get_template('end_of_level.html')
+        scores = {
+        "score": "high_score"
+        ""
+        }
         self.response.out.write(template.render())
 
 app = webapp2.WSGIApplication([

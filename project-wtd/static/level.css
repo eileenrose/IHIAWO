@@ -4,7 +4,9 @@ body {
 
 #lifebar{
   position: absolute;
-  width: 400px;
-  left: 400px;
+  width: 140px;
+  left: 868px;
   text-align: right;
+  border: 1px solid;
+  height: 50px;
 }
