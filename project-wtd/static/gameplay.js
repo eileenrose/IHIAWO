@@ -19,7 +19,8 @@ var isRightPressed = false;
 var isLeftPressed = false;
 var delay = 50;
 var codeX;
-
+var myScore;
+var currentScore = 0;
 
 var lifebar;
 var numLives = 0;
@@ -48,13 +49,14 @@ window.onload = function() {
   background2.src = "static/background.png";
   duckImage.src = "static/duck option one.png";
 
+
   setupMainObstacle();
   setupListeners();
   setupIntervals();
   setuplifeBar();
+  setupScore();
 
 }
-
 function setuplifeBar() {
 //  output = document.getElementById('output');
 //  output.innerHTML = level;
@@ -63,7 +65,21 @@ function setuplifeBar() {
   for(var i=0; i<3; i++) addLife();
 }
 
+function setupScore() {
+  scoreDiv = document.getElementById('score');
+  scoreDiv.innerHTML = 'Score: ' + currentScore;
+}
 
+function incrementScore() {
+  currentScore += 1;
+  scoreDiv = document.getElementById('score');
+  scoreDiv.innerHTML = 'Score: ' + currentScore;
+}
+
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
 
 function addLife() {
   lifebar = document.getElementById('lifebar');
@@ -71,6 +87,17 @@ function addLife() {
   life.src='static/duck-lives.png';
   lifebar.appendChild(life);
   numLives++;
+}
+
+function removeLife(){
+  numLives--;
+  var life = lifebar.children;
+  if(numLives>0){
+    lifebar.removeChild(lifebar.lastChild);
+  }
+  else{
+  msg = "Game Over";
+  }
 }
 
 function setupIntervals(){
@@ -95,7 +122,7 @@ function updateCanvasRight(){
     backgroundX = -35;
     background2X = 1788 - 35;
   }
-  codeX -= 2; //makes code move back 
+  codeX -= 2; //makes code move back
   context.drawImage(background, backgroundX, 0)
   context.drawImage(background2, background2X, 0)
   context.drawImage(duckImage, currentx,currenty)
@@ -150,6 +177,8 @@ function update(){
       context.drawImage(background, backgroundX, 0);
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
+
+      incrementScore();
 }
 
 function keyDownHandler(e) {
