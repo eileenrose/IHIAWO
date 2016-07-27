@@ -62,7 +62,6 @@ function setupListeners() {
 }
 
 function updateCanvasRight(){
-
   context.clearRect(0,0,canvas.width,canvas.height)
   backgroundX -= 35;
   background2X -= 35;

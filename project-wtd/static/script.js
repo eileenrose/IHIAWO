@@ -130,9 +130,7 @@ function keyUpHandler(e) {
         downPressed = false;
     }
 }
-function moveCode(){
-  mX += 35
-}
+
 
 
 //function scrollWrapper(x, y){

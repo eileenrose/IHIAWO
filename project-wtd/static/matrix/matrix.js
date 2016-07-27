@@ -24,12 +24,6 @@ function setupMainObstacle() {
 }
 
 function drawImage(context, x, y, width, height) {
-  //var image = new Image();
-  // image.src = "matrix/images/frame_" + this.current + "_delay-0.1s.gif";
-  // image.onload = function () {
   context.drawImage(imageList[currentImageIndex], x, y, width, height);
   currentImageIndex = (currentImageIndex + 1) % imageList.length;
-  //
-  // this.current = (this.current + 1) % 39;
-
 }
