@@ -87,12 +87,12 @@ function update(){
     if (currenty == groundy && isUpPressed){
       yVelocity = 3;
     }
-    console.log(yVelocity);
+    //console.log(yVelocity);
     yVelocity = yVelocity - delay*gravity;
-    console.log(yVelocity);
-    console.log(currenty);
+    //console.log(yVelocity);
+    //console.log(currenty);
     currenty = currenty - yVelocity*delay;
-    console.log(currenty);
+    //console.log(currenty);
     if (currenty >= groundy){
       yVelocity = 0;
       currenty = groundy;
@@ -111,19 +111,18 @@ document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't 
 function keyDownHandler(e) {
     if(e.keyCode == 39) {
         isRightPressed = true; //when the right key is pressed, the character will move
-        console.log("rightPressed");
+        //console.log("rightPressed");
         updateCanvasRight();
 
     }
     if(e.keyCode == 37) {
         isLeftPressed = true;
-        console.log("leftPressed");
+        //console.log("leftPressed");
         updateCanvasLeft();
     }
     if(e.keyCode == 32) {
         isUpPressed = true;
-        console.log("upPressed");
-        jumping = true;
+        //console.log("upPressed");
 
       }
 }
