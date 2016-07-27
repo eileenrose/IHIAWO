@@ -18,7 +18,8 @@ var isUpPressed = false;
 var isRightPressed = false;
 var isLeftPressed = false;
 var delay = 50;
-var codeX = -400;
+var codeX;
+
 
 var lifebar;
 var numLives = 0;
@@ -26,13 +27,13 @@ var numLives = 0;
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
-var codeImage = new Image();
 
 window.onload = function() {
   canvas = document.getElementById('canvas');
   context = canvas.getContext("2d");
   canvasWidth = canvas.width;
   canvasHeight = canvas.height;
+  codeX = -canvas.width;
 
   background.onload = function(){
     context.drawImage(background, 0, 0)
@@ -77,6 +78,7 @@ function setupIntervals(){
   window.setInterval(moveMainObstacle, 50);
 }
 
+
 function setupListeners() {
   document.addEventListener("keydown", keyDownHandler, false); // the next two lines are calling the function. When the keys are pressed
   document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
@@ -93,9 +95,11 @@ function updateCanvasRight(){
     backgroundX = -35;
     background2X = 1788 - 35;
   }
+  codeX -= 2; //makes code move back 
   context.drawImage(background, backgroundX, 0)
   context.drawImage(background2, background2X, 0)
-  context.drawImage(duckImage, currentx,currenty);
+  context.drawImage(duckImage, currentx,currenty)
+  drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
 
 function updateCanvasLeft(){
@@ -163,9 +167,11 @@ function keyDownHandler(e) {
     if(e.keyCode == 32) {
         isUpPressed = true;
         console.log("upPressed");
-        jumping = true;
 
       }
+      if(e.keyCode == 80) {
+          alert("Press OK to resume the game");
+        }
 }
 function keyUpHandler(e) {
   if(e.keyCode == 39) {
@@ -177,6 +183,7 @@ function keyUpHandler(e) {
   if(e.keyCode == 32) {
       isUpPressed = false;
     }
+
 }
 function runningGame(){
   update();
@@ -184,6 +191,6 @@ function runningGame(){
 
 }
 function moveMainObstacle(){
-  codeX += 10;
+  codeX += 1;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
