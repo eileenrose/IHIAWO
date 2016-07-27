@@ -56,6 +56,7 @@ function setupIntervals(){
   window.setInterval(moveMainObstacle, 50);
 }
 
+
 function setupListeners() {
   document.addEventListener("keydown", keyDownHandler, false); // the next two lines are calling the function. When the keys are pressed
   document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
@@ -142,9 +143,11 @@ function keyDownHandler(e) {
     if(e.keyCode == 32) {
         isUpPressed = true;
         console.log("upPressed");
-        jumping = true;
 
       }
+      if(e.keyCode == 80) {
+          alert("Press OK to resume the game");
+        }
 }
 function keyUpHandler(e) {
   if(e.keyCode == 39) {
@@ -156,6 +159,7 @@ function keyUpHandler(e) {
   if(e.keyCode == 32) {
       isUpPressed = false;
     }
+
 }
 function runningGame(){
   update();
