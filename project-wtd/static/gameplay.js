@@ -214,10 +214,6 @@ function keyUpHandler(e) {
     }
 
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
 function getPositions() {
   var posX = currentx;
   var posY = currenty;
@@ -234,19 +230,14 @@ function comparePositionsCode(p1, p2) {
 }
 
 function checkCollisionsCode(){
-<<<<<<< HEAD
-=======
   if (recentlyCollided) return;
->>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
   var codePos = [codeX+canvas.width, 400];
   var pos = getPositions();
   var horizontalMatch = comparePositionsCode(pos[0], codePos[0]);
   // var verticalMatch = comparePositions(pos[1], codePos[1]);
   // var match = horizontalMatch && verticalMatch;
   var match = horizontalMatch;
-<<<<<<< HEAD
   if (match) { $("body").append("COLLISION!!! "); }
-=======
   if (match) {
     removeLife();
     recentlyCollided = true
@@ -255,7 +246,6 @@ function checkCollisionsCode(){
     }, 2000);
   }
 
->>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
   // make a new function for collisions with obstacles, code, tub
 }
 
@@ -263,19 +253,15 @@ function runningGame(){
   update();
   duckLocation();
   checkCollisionsCode();
-<<<<<<< HEAD
-=======
+
   console.log("I'm running");
->>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
+
 
 }
 function moveMainObstacle(){
   codeX += 1;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> e8922e9a2c600554fe8fcccf0cc3f785c07d7e48
 var audio = new Audio('static/Music.mp3');
 audio.play();
