@@ -79,6 +79,10 @@ function incrementScore() {
   console.log(currentScore);
 }
 
+function getScore(){
+  return currentScore;
+}
+
 
 function addLife() {
   lifebar = document.getElementById('lifebar');
@@ -95,7 +99,7 @@ function removeLife(){
     lifebar.removeChild(lifebar.lastChild);
   }
   else{
-  msg = "Game Over";
+  window.location.assign('static/gameOver.html');
   }
 }
 
@@ -214,6 +218,7 @@ function keyUpHandler(e) {
     }
 
 }
+
 function getPositions() {
   var posX = currentx;
   var posY = currenty;
@@ -237,7 +242,6 @@ function checkCollisionsCode(){
   // var verticalMatch = comparePositions(pos[1], codePos[1]);
   // var match = horizontalMatch && verticalMatch;
   var match = horizontalMatch;
-  if (match) { $("body").append("COLLISION!!! "); }
   if (match) {
     removeLife();
     recentlyCollided = true
@@ -253,15 +257,12 @@ function runningGame(){
   update();
   duckLocation();
   checkCollisionsCode();
-
   console.log("I'm running");
-
 
 }
 function moveMainObstacle(){
   codeX += 1;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
-
 var audio = new Audio('static/Music.mp3');
 audio.play();
