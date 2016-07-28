@@ -19,7 +19,6 @@ h1 {
   text-align: center;
   font-size: 100px;
 }
-<<<<<<< HEAD
 .obstacle{
   position: absolute;
   right: 0px;
@@ -27,7 +26,6 @@ h1 {
   z-index: 20
   height:auto;
   width: 125px;
-=======
 #lifebar{
   position: absolute;
   margin-top: 35px;
@@ -46,5 +44,5 @@ h1 {
   text-align: right;
   border: 1px solid;
   height: 50px;
->>>>>>> e00ba368563a7e0e65039602d1e501c8bf3f9663
+
 }
