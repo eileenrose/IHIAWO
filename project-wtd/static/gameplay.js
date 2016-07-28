@@ -18,18 +18,21 @@ var delay = 50;
 var codeX;
 var dogeX = 600;
 var myScore;
+var pythonX = 1800;
 var currentScore = 0;
 var recentlyCollided = false;
 var lifebar;
 var numLives = 0;
 var backgroundStep = 10;
 var recentlyTouchedDoge = false;
+var recentlyTouchedPython = false;
 
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
 var obstacleRight = 0;
 var dogeImage = new Image();
+var pythonIcon = new Image();
 
 window.onload = function() {
   console.log("loaded window");
@@ -51,10 +54,14 @@ window.onload = function() {
   dogeImage.onload = function () {
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
   }
+  pythonIcon.onload = function () {
+    context.drawImage(pythonIcon, pythonX, 200, 150, 200);
+  }
   background.src = "static/background.png";
   background2.src = "static/background.png";
   duckImage.src = "static/duck option one.png";
   dogeImage.src = "static/Doge.png";
+  pythonIcon.src = "static/pythonIcon.png";
 
 
   setupMainObstacle();
@@ -123,24 +130,21 @@ function updateCanvasRight(fasterScrolling){
 
   if (currentx < 400){ //When the duck gets to the center of image, it stops.
     console.log("this is the dogeX " + dogeX)
-      if ((currentx + 158) > (dogeX-12) && (currentx + 158) < (dogeX + 12)
+      if ((currentx + 158) > (dogeX-12) && (currentx + 158) < (dogeX + 250)
     && currenty >= 200) {
         removeLife();
-        recentlyTouchedDoge = true
-        currentx += 5;
-        window.setTimeout(function(){
-        recentlyTouchedDoge = false;
-        }, 2000);
-
       }
-      else {
-        currentx += 5;
+      //  currentx += 5;
+        window.setTimeout(function() {
+        recentlyTouchedDoge = true;
+      }, 2000);
       }
 
-  }
   backgroundX -= (backgroundStep + fasterScrolling);
   background2X -= (backgroundStep + fasterScrolling);
   dogeX -= (backgroundStep + fasterScrolling);
+  pythonX -=(backgroundStep + fasterScrolling);
+
 console.log("Position of duck is " + currentx)
   console.log("this is the right edge of duck " + (currentx + 158));
   if (background2X < 0){
@@ -196,6 +200,7 @@ function update(){
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
+      context.drawImage(pythonIcon, pythonX, 200, 150, 200);
 
       incrementScore();
 }
