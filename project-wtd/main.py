@@ -19,10 +19,10 @@ class MainHandler(webapp2.RequestHandler):
         if user:
             template = jinja_environment.get_template('startpage.html')
             self.response.out.write(template.render())
-            query = Player.query().order(Player.score)
+            query = Player.query().order(-Player.score)
             player_list = query.fetch()
             for p in player_list:
-                self.response.write('<br><p style="font-size:28px;font-family:verdana;border-style: outset;border-color: purple;border-width: 10px;background-color: yellow;padding: 10px;margin: 20px;">%s: %s, %s</p>' % (p.name, p.level, p.score))
+                self.response.write('<br><p style="font-size:28px;font-family:verdana;border-style: outset;border-color: purple;border-width: 10px;background-color: yellow;padding: 10px;margin: 20px;">%s: %s</p>' % (p.email, p.score))
                 p.put()
         else:
             template = jinja_environment.get_template('startpagenon.html')
@@ -64,6 +64,16 @@ class EndOfLevelHandler(webapp2.RequestHandler):
         }
         self.response.out.write(template.render())
 
+class GameOverHandler(webapp2.RequestHandler):
+    def get(self):
+        email = users.get_current_user().nickname()
+        score = self.request.get('currentScore')
+        player = Player(email=email, score=score)
+        player.put()
+        templateover = jinja_environment.get_template('gameOver.html')
+        self.response.out.write(templateover.render())
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/game', GameHandler),
@@ -71,4 +81,5 @@ app = webapp2.WSGIApplication([
     ('/add', AddScoreHandler),
     ('/instructions', InstructionHandler),
     ('/end_of_level', EndOfLevelHandler),
+    ('/gameOver', GameOverHandler),
 ], debug=True)
