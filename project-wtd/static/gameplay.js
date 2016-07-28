@@ -24,7 +24,6 @@ var lifebar;
 var numLives = 0;
 var backgroundStep = 10;
 var recentlyTouchedDoge = false;
-
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
@@ -32,6 +31,8 @@ var obstacleRight = 0;
 var dogeImage = new Image();
 var bathtubX = 2000;
 var bathtubImage = new Image();
+var gooseX = 1000;
+var gooseImage = new Image();
 
 window.onload = function() {
   console.log("loaded window");
@@ -57,12 +58,16 @@ window.onload = function() {
   bathtubImage.onload = function(){
     context.drawImage(bathtubImage, bathtubX, 250, 200, 250)
   }
+  gooseImage.onload = function(){
+    context.drawImage(gooseImage, gooseX, 250, 200, 200)
+  }
 
   background.src = "static/background.png";
   background2.src = "static/background.png";
   duckImage.src = "static/duck option one.png";
   dogeImage.src = "static/Doge.png";
   bathtubImage.src = "static/bathtub.png"
+  gooseImage.src = "static/goose.png"
 
   // spikeImage.src = "static/spiked platform.png";
 
@@ -154,14 +159,12 @@ function updateCanvasRight(fasterScrolling){
   background2X -= (backgroundStep + fasterScrolling);
   dogeX -= (backgroundStep + fasterScrolling);
   bathtubX -= (backgroundStep + fasterScrolling);
-console.log("Position of duck is " + currentx)
-  console.log("this is the right edge of duck " + (currentx + 158));
-  console.log("the fucking bathtub is at " + bathtubX)
+  gooseX -= (backgroundStep + fasterScrolling);
   if (background2X < 0){
     backgroundX = -backgroundStep;
     background2X = 1788 - backgroundStep;
   }
-  codeX -= 2; //makes code move back
+  codeX -= (2); //makes code move back
 //  context.drawImage(background, backgroundX, 0)
   //context.drawImage(background2, background2X, 0)
   //context.drawImage(duckImage, currentx,currenty)
@@ -209,10 +212,12 @@ function update(){
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
-      context.drawImage(bathtubImage, bathtubX, 200, 200, 250)
+      context.drawImage(bathtubImage, bathtubX, 200, 200, 250);
+      context.drawImage(gooseImage, gooseX, 250, 200, 200);
 
       incrementScore();
 }
+
 
 function keyDownHandler(e) {
     if(e.keyCode == 39) {
@@ -289,7 +294,7 @@ function runningGame(){
 
 }
 function moveMainObstacle(){
-  codeX += 1;
+  codeX += 2;
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
 }
 var audio = new Audio('static/Music.mp3');
