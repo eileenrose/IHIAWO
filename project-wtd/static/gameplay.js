@@ -114,14 +114,11 @@ function setupListeners() {
 function updateCanvasRight(){
   context.clearRect(0,0,canvas.width,canvas.height)
   //mapX += 35;
-
-  if (currenty > 200 || currentx < 400 && currentx != obstacleRight){ //When the duck gets to the center of image, it stops.
-    currentx += 35;
-    if (obstacleRight < 315 || currenty > 200) {
+  backgroundX -= 35;
+  background2X -= 35;
+  if (currentx < 400){ //When the duck gets to the center of image, it stops.
+      currentx += 35;
       obstacleRight += 35;
-      backgroundX -= 35;
-      background2X -= 35;
-    }
   }
   console.log(currentx);
   console.log(obstacleRight);
