@@ -175,7 +175,7 @@ function updateCanvasRight(fasterScrolling){
         currentx += 5;
         window.setTimeout(function(){
         recentlyTouchedDoge = true;
-      }, 2000);
+      }, 10);
       if (currentx < 400){ //When the duck gets to the center of image, it stops.
         console.log("this is the dogeX " + dogeX)
           if ((currentx + 158) > (pythonX-12) && (currentx + 158) < (pythonX + 250)
@@ -186,11 +186,11 @@ function updateCanvasRight(fasterScrolling){
             window.setTimeout(function() {
             recentlyTouchedPython = true;
           }, 2000);
+
+}
+
       }
-
-
-
-      }
+    }
       //  currentx += 5;
       //   window.setTimeout(function() {
       //   recentlyTouchedDoge = true;
