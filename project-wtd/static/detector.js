@@ -30,6 +30,8 @@ var background2 = new Image();
 var duckImage = new Image();
 var obstacleRight = 0;
 var dogeImage = new Image();
+var bathtubX = 2000;
+var bathtubImage = new Image();
 
 window.onload = function() {
  console.log("loaded window");
@@ -52,14 +54,15 @@ window.onload = function() {
      context.drawImage(dogeImage, dogeX, 200, 150, 200);
  }
 
- // spikeImage.onload = function () {
- //     context.drawImage(spikeImage, spikeX, 200, 150, 200);
- // }
+ bathtubImage.onload = function(){
+   context.drawImage(bathtubImage, bathtubX, 250, 200, 250)
+ }
 
  background.src = "static/background.png";
  background2.src = "static/background.png";
  duckImage.src = "static/duck option one.png";
  dogeImage.src = "static/Doge.png";
+ bathtubImage.src = "static/bathtub.png"
 
  // spikeImage.src = "static/spiked platform.png";
 
@@ -139,16 +142,23 @@ function updateCanvasRight(fasterScrolling){
        window.setTimeout(function(){
        recentlyTouchedDoge = true;
      }, 10);
-
-     }
+   }
      else {
        currentx += 5;
      }
 
- }
+}
+if ((currentx + 158) > (bathtubX-120) && (currentx + 158) < (bathtubX + 25)
+&& currenty >= 200) {
+  window.location.assign('/end_of_level?currentScore=' + currentScore);
+     }
  backgroundX -= (backgroundStep + fasterScrolling);
  background2X -= (backgroundStep + fasterScrolling);
  dogeX -= (backgroundStep + fasterScrolling);
+ bathtubX -= (backgroundStep + fasterScrolling);
+console.log("Position of duck is " + currentx)
+ console.log("this is the right edge of duck " + (currentx + 158));
+ console.log("the fucking bathtub is at " + bathtubX)
  if (background2X < 0){
    backgroundX = -backgroundStep;
    background2X = 1788 - backgroundStep;
@@ -201,6 +211,7 @@ function update(){
      context.drawImage(background2, background2X, 0);
      context.drawImage(duckImage, currentx,currenty);
      context.drawImage(dogeImage, dogeX, 200, 150, 200);
+     context.drawImage(bathtubImage, bathtubX, 200, 200, 250)
 
      incrementScore();
 }
