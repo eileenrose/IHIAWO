@@ -133,15 +133,16 @@ function updateCanvasRight(fasterScrolling){
   //mapX += 35;
 
   if (currentx < 400){ //When the duck gets to the center of image, it stops.
-    console.log("this is the dogeX " + dogeX)
-      if ((currentx + 158) > (dogeX-12) && (currentx + 158) < (dogeX + 12)
+      if ((currentx + 158) > (dogeX-12) && (currentx + 158) < (dogeX + 250)
     && currenty >= 200) {
+      if (recentlyTouchedDoge == false){
         removeLife();
-        recentlyTouchedDoge = true
+      }
         currentx += 5;
         window.setTimeout(function(){
-        recentlyTouchedDoge = false;
-        }, 2000);
+        recentlyTouchedDoge = true;
+      }, 10);
+
 
       }
       else {
