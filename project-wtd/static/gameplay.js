@@ -10,8 +10,6 @@ var background2X = 1788;
 var runGame = true;
 var gravity = .01;
 var jumpspeed = -20;
-var d = new Date();
-var lastUpdate = d.getTime();
 var yVelocity = 0;
 var isUpPressed = false;
 var isRightPressed = false;
@@ -19,12 +17,13 @@ var isLeftPressed = false;
 var delay = 50;
 var codeX;
 var dogeX = 600;
+var spikeX = 1000;
 var myScore;
 var currentScore = 0;
 var recentlyCollided = false;
 var lifebar;
 var numLives = 0;
-var backgroundStep = 5;
+var backgroundStep = 10;
 var recentlyTouchedDoge = false;
 
 var background = new Image();
@@ -53,10 +52,14 @@ window.onload = function() {
   dogeImage.onload = function () {
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
   }
+  spikeImage.onload = function () {
+      context.drawImage(spikeImage, spikeX, 200, 150, 200);
+  }
   background.src = "static/background.png";
   background2.src = "static/background.png";
   duckImage.src = "static/duck option one.png";
   dogeImage.src = "static/Doge.png";
+  spikeImage.src = "static/spiked platform.png";
 
 
   setupMainObstacle();
@@ -124,23 +127,27 @@ function updateCanvasRight(){
   //mapX += 35;
 
   if (currentx < 400){ //When the duck gets to the center of image, it stops.
-    console.log("this is the dogeX" + dogeX)
+    console.log("this is the dogeX " + dogeX)
       if ((currentx + 158) > (dogeX-12) && (currentx + 158) < (dogeX + 12)
     && currenty >= 200) {
         removeLife();
         recentlyTouchedDoge = true
+        currentx += 5;
         window.setTimeout(function(){
         recentlyTouchedDoge = false;
         }, 2000);
+
       }
       else {
-        backgroundX -= backgroundStep;
-        background2X -= backgroundStep;
-        dogeX -= backgroundStep;
         currentx += 5;
       }
+
   }
-  console.log("this is the right edge of duck" + (currentx + 158));
+  backgroundX -= backgroundStep;
+  background2X -= backgroundStep;
+  dogeX -= backgroundStep;
+console.log("Position of duck is " + currentx)
+  console.log("this is the right edge of duck " + (currentx + 158));
   if (background2X < 0){
     backgroundX = -backgroundStep;
     background2X = 1788 - backgroundStep;
@@ -173,22 +180,6 @@ function updateCanvasLeft(){
   //context.drawImage(duckImage, currentx,currenty);
 }
 
-function scrollWrapper(x, y){
-    var wrapper = document.getElementById('wrapper');
-    // wrapper.scrollTop = x;
-    // wrapper.scrollLeft = y;
-}
-function duckLocation(){
-  var x = currentx - 100
-  var y = currenty - 100
-  if (x<0){
-    x=0
-  }
-  if (y<0){
-    y=0
-  }
-  scrollWrapper(x,y)
-}
 
 function update(){
     if (currenty == groundy && isUpPressed){
@@ -229,12 +220,12 @@ function keyDownHandler(e) {
     if(e.keyCode == 37) {
         isLeftPressed = true;
         console.log("leftPressed");
-      //  updateCanvasLeft();
+      // updateCanvasLeft();
     }
     if(e.keyCode == 32) {
         isUpPressed = true;
         console.log("upPressed");
-    //    updateCanvasLeft();
+      //  updateCanvasLeft();
 
       }
       if(e.keyCode == 80) {
@@ -290,7 +281,6 @@ function checkCollisionsCode(){
 
 function runningGame(){
   update();
-  duckLocation();
   checkCollisionsCode();
 
 }
