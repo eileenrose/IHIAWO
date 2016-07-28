@@ -34,6 +34,7 @@ var backgroundStep = 10;
 var recentlyTouchedDoge = false;
 var recentlyTouchedPython = false;
 var recentlyTouchedGoose = false;
+var recentlyTouchedJavascript = false;
 
 var background = new Image();
 var background2 = new Image();
@@ -177,21 +178,19 @@ function updateCanvasRight(fasterScrolling){
         window.setTimeout(function(){
         recentlyTouchedDoge = true;
       }, 10);
-      if (currentx < 400){ //When the duck gets to the center of image, it stops.
-        console.log("this is the dogeX " + dogeX)
+}
           if ((currentx + 158) > (pythonX-12) && (currentx + 158) < (pythonX + 250)
         && currenty >= 200) {
+          if (recentlyTouchedPython == false){
             removeLife();
           }
-          //  currentx += 5;
+          currentx += 5;
             window.setTimeout(function() {
             recentlyTouchedPython = true;
-          }, 2000);
+          }, 10);
 
-}
 
       }
-    }
       //  currentx += 5;
       //   window.setTimeout(function() {
       //   recentlyTouchedDoge = true;
@@ -207,9 +206,20 @@ function updateCanvasRight(fasterScrolling){
         recentlyTouchedGoose = true;
       }, 10);
 
-      }
     }
+    if ((currentx + 158) > (jsX-12) && (currentx + 158) < (jsX + 250)
+  && currenty >= 200) {
+    if (recentlyTouchedJavascript == false){
+      removeLife();
 
+    }
+      currentx += 5;
+      window.setTimeout(function(){
+      recentlyTouchedJavascript = true;
+    }, 10);
+
+  }
+}
   backgroundX -= (backgroundStep + fasterScrolling);
   background2X -= (backgroundStep + fasterScrolling);
   dogeX -= (backgroundStep + fasterScrolling);
