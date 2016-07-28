@@ -56,13 +56,21 @@ class InstructionHandler(webapp2.RequestHandler):
         templateinstructions = jinja_environment.get_template('instructions.html')
         self.response.out.write(templateinstructions.render())
 class EndOfLevelHandler(webapp2.RequestHandler):
-    def post(self):
-        template = jinja_environment.get_template('end_of_level.html')
-        scores = {
-        "score": "high_score"
-        ""
-        }
-        self.response.out.write(template.render())
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            email = users.get_current_user().nickname()
+            score = self.request.get('currentScore')
+            player = Player(email=email, score=score)
+            player.put()
+            templateover = jinja_environment.get_template('end_of_level.html')
+            self.response.out.write('<h1 style="font-size:48px;">Your score: %s</h1>' % score)
+            self.response.out.write(templateover.render())
+        else:
+            score = self.request.get('currentScore')
+            templateover = jinja_environment.get_template('end_of_level.html')
+            self.response.out.write('<h1 style ="font-size:48px;">Your score: %s</h1>' % score)
+            self.response.out.write(templateover.render())
 
 class GameOverHandler(webapp2.RequestHandler):
     def get(self):
