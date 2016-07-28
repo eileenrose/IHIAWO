@@ -73,13 +73,14 @@ class GameOverHandler(webapp2.RequestHandler):
             player = Player(email=email, score=score)
             player.put()
             templateover = jinja_environment.get_template('gameOver.html')
+            self.response.out.write('<h1 style="font-size:48px;">Your score: %s</h1>' % score)
             self.response.out.write(templateover.render())
-            self.response.out.write('<h1>Your score: %s</p>' % score)
         else:
             score = self.request.get('currentScore')
             templateover = jinja_environment.get_template('gameOver.html')
+            self.response.out.write('<h1 style ="font-size:48px;">Your score: %s</h1>' % score)
             self.response.out.write(templateover.render())
-            self.response.out.write('<h1>Your score: %s</p>' % score)
+
 
 
 
