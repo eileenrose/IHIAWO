@@ -33,16 +33,20 @@ var backgroundStep = 10;
 
 var recentlyTouchedDoge = false;
 var recentlyTouchedPython = false;
+var recentlyTouchedGoose = false;
 
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
 var dogeImage = new Image();
 var pythonIcon = new Image();
+
+var bathtubX = 2000;
 var bathtubImage = new Image();
 var gooseImage = new Image();
 var spikeImage = new Image();
 var jsImage = new Image();
+
 
 window.onload = function() {
   console.log("loaded window");
@@ -161,13 +165,17 @@ function updateCanvasRight(fasterScrolling){
   //mapX += 35;
 
   if (currentx < 400){ //When the duck gets to the center of image, it stops.
+
     console.log("this is the dogeX " + dogeX)
+
       if ((currentx + 158) > (dogeX-12) && (currentx + 158) < (dogeX + 250)
     && currenty >= 200) {
+      if (recentlyTouchedDoge == false){
         removeLife();
+
       }
-      //  currentx += 5;
-        window.setTimeout(function() {
+        currentx += 5;
+        window.setTimeout(function(){
         recentlyTouchedDoge = true;
       }, 2000);
       if (currentx < 400){ //When the duck gets to the center of image, it stops.
@@ -180,6 +188,26 @@ function updateCanvasRight(fasterScrolling){
             window.setTimeout(function() {
             recentlyTouchedPython = true;
           }, 2000);
+      }, 10);
+
+
+
+      }
+      //  currentx += 5;
+      //   window.setTimeout(function() {
+      //   recentlyTouchedDoge = true;
+      // }, 2000);
+      if ((currentx + 158) > (gooseX-12) && (currentx + 158) < (gooseX + 250)
+    && currenty >= 200) {
+      if (recentlyTouchedGoose == false){
+        removeLife();
+
+      }
+        currentx += 5;
+        window.setTimeout(function(){
+        recentlyTouchedGoose = true;
+      }, 10);
+
       }
     }
 
@@ -196,10 +224,16 @@ console.log("Position of duck is " + currentx)
   console.log("this is the right edge of duck " + (currentx + 158));
 
 
+
+
   if (background2X < 0){
     backgroundX = -backgroundStep;
     background2X = 1788 - backgroundStep;
   }
+  if ((currentx + 158) > (bathtubX)
+  && currenty >= 200) {
+    window.location.assign('/end_of_level?currentScore=' + currentScore);
+       }
   codeX -= (2); //makes code move back
 //  context.drawImage(background, backgroundX, 0)
   //context.drawImage(background2, background2X, 0)
@@ -218,6 +252,7 @@ function updateCanvasLeft(){
   //context.drawImage(background2, background2X, 0)
 
   //context.drawImage(duckImage, currentx,currenty);
+}
 }
 
 
@@ -248,11 +283,19 @@ function update(){
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
+<<<<<<< HEAD
       context.drawImage(pythonIcon, pythonX, 200, 150, 200);
       context.drawImage(bathtubImage, bathtubX, 200, 200, 250);
       context.drawImage(gooseImage, gooseX, 250, 200, 200);
       context.drawImage(spikeImage, spikeX, 250, 200, 200);
       context.drawImage(jsImage, jsX, 250, 200, 200);
+=======
+
+      context.drawImage(pythonIcon, pythonX, 200, 150, 200);
+
+      context.drawImage(bathtubImage, bathtubX, 200, 200, 250);
+      context.drawImage(gooseImage, gooseX, 250, 200, 200);
+>>>>>>> 8a1af78d766e15c7abdc89895e591ba0e259fdfe
 
 
       incrementScore();
