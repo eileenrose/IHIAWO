@@ -18,13 +18,12 @@ var isRightPressed = false;
 var isLeftPressed = false;
 var delay = 50;
 var codeX;
-<<<<<<< HEAD
 var mapX = 0;
-=======
 var myScore;
 var currentScore = 0;
 var recentlyCollided = false;
->>>>>>> e00ba368563a7e0e65039602d1e501c8bf3f9663
+
+
 
 var lifebar;
 var numLives = 0;
@@ -60,12 +59,12 @@ window.onload = function() {
   setupListeners();
   setupIntervals();
   setuplifeBar();
-<<<<<<< HEAD
+
   drawObstacles();
-=======
+
   setupScore();
   runningGame();
->>>>>>> e00ba368563a7e0e65039602d1e501c8bf3f9663
+
 
 }
 function setuplifeBar() {
