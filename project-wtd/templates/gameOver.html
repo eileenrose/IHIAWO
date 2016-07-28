@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="static/gameplay.js"></script>
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="static/gameOver.css"/>
 </head>
 <body>
+  <div class="container-fluid">
   <img src ="static/sad duck.jpg">
-  <form action="/game"><button>Try Again?</button></form>
-  <form action="/"><button>End Game</button></form>
+  <div class="row">
+    <div class="col-md-6"><form action="/game"><button class="btn btn-block button innershadow"><h1>Try Again?</button></form></h1></div>
+  <div class="col-md-6"><form action="/"><button class="btn btn-block button innershadow"><h1>End Game</button></form></h1></div>
+</div>
+</div>
 </body>
 </html>
