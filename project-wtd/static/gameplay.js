@@ -1,4 +1,4 @@
-var canvas;
+ var canvas;
 var context;
 var canvasWidth;
 var canvasHeight;
@@ -17,7 +17,6 @@ var isLeftPressed = false;
 var delay = 50;
 var codeX;
 var dogeX = 600;
-var spikeX = 1000;
 var myScore;
 var currentScore = 0;
 var recentlyCollided = false;
@@ -52,14 +51,18 @@ window.onload = function() {
   dogeImage.onload = function () {
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
   }
+
   // spikeImage.onload = function () {
   //     context.drawImage(spikeImage, spikeX, 200, 150, 200);
   // }
+
   background.src = "static/background.png";
   background2.src = "static/background.png";
   duckImage.src = "static/duck option one.png";
   dogeImage.src = "static/Doge.png";
+
   // spikeImage.src = "static/spiked platform.png";
+
 
 
   setupMainObstacle();
@@ -122,7 +125,7 @@ function setupListeners() {
   document.addEventListener("keydown", keyDownHandler, false); // the next two lines are calling the function. When the keys are pressed
   document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
 }
-function updateCanvasRight(){
+function updateCanvasRight(fasterScrolling){
 //  context.clearRect(0,0,canvas.width,canvas.height)
   //mapX += 35;
 
@@ -143,9 +146,9 @@ function updateCanvasRight(){
       }
 
   }
-  backgroundX -= backgroundStep;
-  background2X -= backgroundStep;
-  dogeX -= backgroundStep;
+  backgroundX -= (backgroundStep + fasterScrolling);
+  background2X -= (backgroundStep + fasterScrolling);
+  dogeX -= (backgroundStep + fasterScrolling);
 console.log("Position of duck is " + currentx)
   console.log("this is the right edge of duck " + (currentx + 158));
   if (background2X < 0){
@@ -158,14 +161,6 @@ console.log("Position of duck is " + currentx)
   //context.drawImage(duckImage, currentx,currenty)
 //  drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
   //$("#1").css("right", obstacleRight);
-
-}
-function drawObstacles(){
-    if (mapX >= 700){
-      obstacleX = (mapX/2)
-      context.drawImage(duckImage, obstacleX , 200)
-      console.log("the position of the obstacle is " + obstacleX)
-    }
 
 }
 function updateCanvasLeft(){
@@ -190,13 +185,16 @@ function update(){
     //console.log(yVelocity);
     //console.log(currenty);
     currenty = currenty - yVelocity*delay;
-    //console.log(currenty);
+    console.log(currenty);
     if (currenty >= groundy){
       yVelocity = 0;
       currenty = groundy;
     }
-    if (isRightPressed) {
-      updateCanvasRight();
+    if (isRightPressed && currenty < 75) {
+     updateCanvasRight(10);
+    }
+    if(isRightPressed){
+      updateCanvasRight(0);
     }
     if (isLeftPressed) {
       updateCanvasLeft();
