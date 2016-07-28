@@ -19,14 +19,8 @@ h1 {
   text-align: center;
   font-size: 100px;
 }
-.obstacle{
-  position: absolute;
-  right: 0px;
-  bottom: 20px;
-  z-index: 20
-  height:auto;
-  width: 125px;
-#lifebar{
+
+ #lifebar{
   position: absolute;
   margin-top: 35px;
   width: 140px;

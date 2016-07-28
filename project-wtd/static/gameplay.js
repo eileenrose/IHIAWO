@@ -18,16 +18,20 @@ var isRightPressed = false;
 var isLeftPressed = false;
 var delay = 50;
 var codeX;
+var dogeX = 600;
 var myScore;
 var currentScore = 0;
 var recentlyCollided = false;
 var lifebar;
 var numLives = 0;
+var backgroundStep = 5;
+var recentlyTouchedDoge = false;
 
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
 var obstacleRight = 0;
+var dogeImage = new Image();
 
 window.onload = function() {
   console.log("loaded window");
@@ -46,9 +50,13 @@ window.onload = function() {
   duckImage.onload = function () {
       context.drawImage(duckImage, 100, 200);
   }
+  dogeImage.onload = function () {
+      context.drawImage(dogeImage, dogeX, 200, 150, 200);
+  }
   background.src = "static/background.png";
   background2.src = "static/background.png";
   duckImage.src = "static/duck option one.png";
+  dogeImage.src = "static/Doge.png";
 
 
   setupMainObstacle();
@@ -72,16 +80,16 @@ function setupScore() {
   scoreDiv.innerHTML = 'Score: ' + currentScore;
 }
 
-function incrementScore() {
+function incrementScore() { //allows the score to go from 0 up by 1 for every pixle moved by the background
   currentScore += 1;
   scoreDiv = document.getElementById('score');
   scoreDiv.innerHTML = 'Score: ' + currentScore;
-  console.log(currentScore);
+
 }
 
 
 
-function addLife() {
+function addLife() { //Allows the player to have three lives
   lifebar = document.getElementById('lifebar');
   var life = new Image();
   life.src='static/duck-lives.png';
@@ -89,7 +97,7 @@ function addLife() {
   numLives++;
 }
 
-function removeLife(){
+function removeLife(){ //Removes lives
   numLives--;
   var life = lifebar.children;
   if(numLives>=0){
@@ -112,26 +120,37 @@ function setupListeners() {
   document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
 }
 function updateCanvasRight(){
-  context.clearRect(0,0,canvas.width,canvas.height)
+//  context.clearRect(0,0,canvas.width,canvas.height)
   //mapX += 35;
-  backgroundX -= 35;
-  background2X -= 35;
+
   if (currentx < 400){ //When the duck gets to the center of image, it stops.
-      currentx += 35;
-      obstacleRight += 35;
+    console.log("this is the dogeX" + dogeX)
+      if ((currentx + 158) > (dogeX-12) && (currentx + 158) < (dogeX + 12)
+    && currenty >= 200) {
+        removeLife();
+        recentlyTouchedDoge = true
+        window.setTimeout(function(){
+        recentlyTouchedDoge = false;
+        }, 2000);
+      }
+      else {
+        backgroundX -= backgroundStep;
+        background2X -= backgroundStep;
+        dogeX -= backgroundStep;
+        currentx += 5;
+      }
   }
-  console.log(currentx);
-  console.log(obstacleRight);
+  console.log("this is the right edge of duck" + (currentx + 158));
   if (background2X < 0){
-    backgroundX = -35;
-    background2X = 1788 - 35;
+    backgroundX = -backgroundStep;
+    background2X = 1788 - backgroundStep;
   }
   codeX -= 2; //makes code move back
-  context.drawImage(background, backgroundX, 0)
-  context.drawImage(background2, background2X, 0)
-  context.drawImage(duckImage, currentx,currenty)
-  drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
-  $("#1").css("right", obstacleRight);
+//  context.drawImage(background, backgroundX, 0)
+  //context.drawImage(background2, background2X, 0)
+  //context.drawImage(duckImage, currentx,currenty)
+//  drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
+  //$("#1").css("right", obstacleRight);
 
 }
 function drawObstacles(){
@@ -144,14 +163,14 @@ function drawObstacles(){
 }
 function updateCanvasLeft(){
 
-  context.clearRect(0,0,canvas.width,canvas.height)
+  //context.clearRect(0,0,canvas.width,canvas.height)
   if (currentx > 0){
-    currentx -= 35;
+    currentx -= 5;
   }
-  context.drawImage(background, backgroundX, 0)
-  context.drawImage(background2, background2X, 0)
+  //context.drawImage(background, backgroundX, 0)
+  //context.drawImage(background2, background2X, 0)
 
-  context.drawImage(duckImage, currentx,currenty);
+  //context.drawImage(duckImage, currentx,currenty);
 }
 
 function scrollWrapper(x, y){
@@ -174,7 +193,7 @@ function duckLocation(){
 function update(){
     if (currenty == groundy && isUpPressed){
       yVelocity = 3;
-    }
+    }//this makes the duck jump and fall
     //console.log(yVelocity);
     yVelocity = yVelocity - delay*gravity;
     //console.log(yVelocity);
@@ -185,13 +204,18 @@ function update(){
       yVelocity = 0;
       currenty = groundy;
     }
-
+    if (isRightPressed) {
+      updateCanvasRight();
+    }
+    if (isLeftPressed) {
+      updateCanvasLeft();
+    }
       context.clearRect(0,0,canvas.width,canvas.height);
       context.drawImage(background, backgroundX, 0);
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
+      context.drawImage(dogeImage, dogeX, 200, 150, 200);
 
-      console.log("updating");
       incrementScore();
 }
 
@@ -199,17 +223,18 @@ function keyDownHandler(e) {
     if(e.keyCode == 39) {
         isRightPressed = true; //when the right key is pressed, the character will move
         console.log("rightPressed");
-        updateCanvasRight();
+      //  updateCanvasRight();
 
     }
     if(e.keyCode == 37) {
         isLeftPressed = true;
         console.log("leftPressed");
-        updateCanvasLeft();
+      //  updateCanvasLeft();
     }
     if(e.keyCode == 32) {
         isUpPressed = true;
         console.log("upPressed");
+    //    updateCanvasLeft();
 
       }
       if(e.keyCode == 80) {
@@ -267,7 +292,6 @@ function runningGame(){
   update();
   duckLocation();
   checkCollisionsCode();
-  console.log("I'm running");
 
 }
 function moveMainObstacle(){
