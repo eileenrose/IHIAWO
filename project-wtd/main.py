@@ -66,12 +66,18 @@ class EndOfLevelHandler(webapp2.RequestHandler):
 
 class GameOverHandler(webapp2.RequestHandler):
     def get(self):
-        email = users.get_current_user().nickname()
-        score = self.request.get('currentScore')
-        player = Player(email=email, score=score)
-        player.put()
-        templateover = jinja_environment.get_template('gameOver.html')
-        self.response.out.write(templateover.render())
+        user = users.get_current_user()
+        if user:
+            email = users.get_current_user().nickname()
+            score = self.request.get('currentScore')
+            player = Player(email=email, score=score)
+            player.put()
+            templateover = jinja_environment.get_template('gameOver.html')
+            self.response.out.write(templateover.render())
+        else:
+            templateover = jinja_environment.get_template('gameOver.html')
+            self.response.out.write(templateover.render())
+
 
 
 app = webapp2.WSGIApplication([
