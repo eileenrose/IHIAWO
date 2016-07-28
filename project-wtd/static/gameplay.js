@@ -79,9 +79,6 @@ function incrementScore() {
   console.log(currentScore);
 }
 
-function getScore(){
-  return currentScore;
-}
 
 
 function addLife() {
@@ -99,7 +96,7 @@ function removeLife(){
     lifebar.removeChild(lifebar.lastChild);
   }
   else{
-  window.location.assign('static/gameOver.html');
+  window.location.assign('/gameOver?currentScore=' + currentScore);
   }
 }
 
