@@ -30,6 +30,8 @@ var background2 = new Image();
 var duckImage = new Image();
 var obstacleRight = 0;
 var dogeImage = new Image();
+var bathtubX = 2000;
+var bathtubImage = new Image();
 
 window.onload = function() {
   console.log("loaded window");
@@ -51,10 +53,14 @@ window.onload = function() {
   dogeImage.onload = function () {
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
   }
+  bathtubImage.onload = function(){
+    context.drawImage(bathtubImage, bathtubX, 250, 200, 250)
+  }
   background.src = "static/background.png";
   background2.src = "static/background.png";
   duckImage.src = "static/duck option one.png";
   dogeImage.src = "static/Doge.png";
+  bathtubImage.src = "static/bathtub.png"
 
 
   setupMainObstacle();
@@ -141,8 +147,10 @@ function updateCanvasRight(fasterScrolling){
   backgroundX -= (backgroundStep + fasterScrolling);
   background2X -= (backgroundStep + fasterScrolling);
   dogeX -= (backgroundStep + fasterScrolling);
+  bathtubX -= (backgroundStep + fasterScrolling);
 console.log("Position of duck is " + currentx)
   console.log("this is the right edge of duck " + (currentx + 158));
+  console.log("the fucking bathtub is at " + bathtubX)
   if (background2X < 0){
     backgroundX = -backgroundStep;
     background2X = 1788 - backgroundStep;
@@ -177,7 +185,6 @@ function update(){
     //console.log(yVelocity);
     //console.log(currenty);
     currenty = currenty - yVelocity*delay;
-    console.log(currenty);
     if (currenty >= groundy){
       yVelocity = 0;
       currenty = groundy;
@@ -196,6 +203,7 @@ function update(){
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
+      context.drawImage(bathtubImage, bathtubX, 200, 200, 250)
 
       incrementScore();
 }
