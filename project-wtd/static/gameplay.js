@@ -52,14 +52,14 @@ window.onload = function() {
   dogeImage.onload = function () {
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
   }
-  spikeImage.onload = function () {
-      context.drawImage(spikeImage, spikeX, 200, 150, 200);
-  }
+  // spikeImage.onload = function () {
+  //     context.drawImage(spikeImage, spikeX, 200, 150, 200);
+  // }
   background.src = "static/background.png";
   background2.src = "static/background.png";
   duckImage.src = "static/duck option one.png";
   dogeImage.src = "static/Doge.png";
-  spikeImage.src = "static/spiked platform.png";
+  // spikeImage.src = "static/spiked platform.png";
 
 
   setupMainObstacle();
