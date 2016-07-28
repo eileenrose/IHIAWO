@@ -22,7 +22,7 @@ var pythonX = 1500;
 var spikeX = 2300;
 var jsX = 1800;
 var obstacleRight = 0;
-var bathtubX = 2500;
+var bathtubX = 2800;
 var gooseX = 1000;
 
 var currentScore = 0;
@@ -41,7 +41,6 @@ var background2 = new Image();
 var duckImage = new Image();
 var dogeImage = new Image();
 var pythonIcon = new Image();
-var bathtubX = 2000;
 var bathtubImage = new Image();
 var gooseImage = new Image();
 var spikeImage = new Image();
