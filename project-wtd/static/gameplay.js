@@ -25,24 +25,18 @@ var lifebar;
 var numLives = 0;
 var backgroundStep = 10;
 var recentlyTouchedDoge = false;
-<<<<<<< HEAD
 var recentlyTouchedPython = false;
-
-=======
->>>>>>> 18b3e02c8740f208b52a757383a729554c81ea62
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
 var obstacleRight = 0;
 var dogeImage = new Image();
-<<<<<<< HEAD
 var pythonIcon = new Image();
-=======
 var bathtubX = 2000;
 var bathtubImage = new Image();
 var gooseX = 1000;
 var gooseImage = new Image();
->>>>>>> 18b3e02c8740f208b52a757383a729554c81ea62
+
 
 window.onload = function() {
   console.log("loaded window");
@@ -167,15 +161,12 @@ function updateCanvasRight(fasterScrolling){
   backgroundX -= (backgroundStep + fasterScrolling);
   background2X -= (backgroundStep + fasterScrolling);
   dogeX -= (backgroundStep + fasterScrolling);
-<<<<<<< HEAD
   pythonX -=(backgroundStep + fasterScrolling);
 
 console.log("Position of duck is " + currentx)
   console.log("this is the right edge of duck " + (currentx + 158));
-=======
   bathtubX -= (backgroundStep + fasterScrolling);
   gooseX -= (backgroundStep + fasterScrolling);
->>>>>>> 18b3e02c8740f208b52a757383a729554c81ea62
   if (background2X < 0){
     backgroundX = -backgroundStep;
     background2X = 1788 - backgroundStep;
@@ -228,12 +219,9 @@ function update(){
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
-<<<<<<< HEAD
       context.drawImage(pythonIcon, pythonX, 200, 150, 200);
-=======
       context.drawImage(bathtubImage, bathtubX, 200, 200, 250);
       context.drawImage(gooseImage, gooseX, 250, 200, 200);
->>>>>>> 18b3e02c8740f208b52a757383a729554c81ea62
 
       incrementScore();
 }
