@@ -40,7 +40,6 @@ var background2 = new Image();
 var duckImage = new Image();
 var dogeImage = new Image();
 var pythonIcon = new Image();
-
 var bathtubX = 2000;
 var bathtubImage = new Image();
 var gooseImage = new Image();
@@ -223,8 +222,8 @@ function updateCanvasRight(fasterScrolling){
 console.log("Position of duck is " + currentx)
   console.log("this is the right edge of duck " + (currentx + 158));
 
-
-
+  bathtubX -= (backgroundStep + fasterScrolling);
+  gooseX -= (backgroundStep + fasterScrolling);
 
   if (background2X < 0){
     backgroundX = -backgroundStep;
@@ -283,20 +282,16 @@ function update(){
       context.drawImage(background2, background2X, 0);
       context.drawImage(duckImage, currentx,currenty);
       context.drawImage(dogeImage, dogeX, 200, 150, 200);
-<<<<<<< HEAD
+
       context.drawImage(pythonIcon, pythonX, 200, 150, 200);
       context.drawImage(bathtubImage, bathtubX, 200, 200, 250);
       context.drawImage(gooseImage, gooseX, 250, 200, 200);
       context.drawImage(spikeImage, spikeX, 250, 200, 200);
       context.drawImage(jsImage, jsX, 250, 200, 200);
-=======
 
       context.drawImage(pythonIcon, pythonX, 200, 150, 200);
-
       context.drawImage(bathtubImage, bathtubX, 200, 200, 250);
       context.drawImage(gooseImage, gooseX, 250, 200, 200);
->>>>>>> 8a1af78d766e15c7abdc89895e591ba0e259fdfe
-
 
       incrementScore();
 }
