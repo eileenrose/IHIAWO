@@ -26,6 +26,7 @@ var numLives = 0;
 var backgroundStep = 10;
 var recentlyTouchedDoge = false;
 var recentlyTouchedPython = false;
+var recentlyTouchedGoose = false;
 
 var background = new Image();
 var background2 = new Image();
@@ -168,9 +169,20 @@ function updateCanvasRight(fasterScrolling){
 
       }
       //  currentx += 5;
-        window.setTimeout(function() {
-        recentlyTouchedDoge = true;
-      }, 2000);
+      //   window.setTimeout(function() {
+      //   recentlyTouchedDoge = true;
+      // }, 2000);
+      if ((currentx + 158) > (gooseX-12) && (currentx + 158) < (gooseX + 250)
+    && currenty >= 200) {
+      if (recentlyTouchedGoose == false){
+        removeLife();
+
+      }
+        currentx += 5;
+        window.setTimeout(function(){
+        recentlyTouchedGoose = true;
+      }, 10);
+
       }
 
   backgroundX -= (backgroundStep + fasterScrolling);
@@ -189,6 +201,10 @@ console.log("Position of duck is " + currentx)
     backgroundX = -backgroundStep;
     background2X = 1788 - backgroundStep;
   }
+  if ((currentx + 158) > (bathtubX)
+  && currenty >= 200) {
+    window.location.assign('/end_of_level?currentScore=' + currentScore);
+       }
   codeX -= (2); //makes code move back
 //  context.drawImage(background, backgroundX, 0)
   //context.drawImage(background2, background2X, 0)
@@ -207,6 +223,7 @@ function updateCanvasLeft(){
   //context.drawImage(background2, background2X, 0)
 
   //context.drawImage(duckImage, currentx,currenty);
+}
 }
 
 

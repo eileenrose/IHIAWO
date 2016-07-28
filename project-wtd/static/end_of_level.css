@@ -25,16 +25,11 @@ body{
 
     display: inline-block;
   border-radius: 4px;
-  background-color: #f4511e;
-  border: none;
-  color: #FFFFFF;
+
   text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 200px;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 5px;
+
 }
 
 .button2:hover {
@@ -51,7 +46,7 @@ body{
 }
 
 .button2 span:after {
-  content: '»';
+  content: '➟';
   position: absolute;
   opacity: 0;
   top: 0;
