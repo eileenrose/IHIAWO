@@ -74,9 +74,12 @@ class GameOverHandler(webapp2.RequestHandler):
             player.put()
             templateover = jinja_environment.get_template('gameOver.html')
             self.response.out.write(templateover.render())
+            self.response.out.write('<h1>Your score: %s</p>' % score)
         else:
+            score = self.request.get('currentScore')
             templateover = jinja_environment.get_template('gameOver.html')
             self.response.out.write(templateover.render())
+            self.response.out.write('<h1>Your score: %s</p>' % score)
 
 
 
