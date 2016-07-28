@@ -187,7 +187,7 @@ function updateCanvasRight(fasterScrolling){
             window.setTimeout(function() {
             recentlyTouchedPython = true;
           }, 2000);
-      }, 10);
+      }
 
 
 
@@ -222,8 +222,6 @@ function updateCanvasRight(fasterScrolling){
 console.log("Position of duck is " + currentx)
   console.log("this is the right edge of duck " + (currentx + 158));
 
-  bathtubX -= (backgroundStep + fasterScrolling);
-  gooseX -= (backgroundStep + fasterScrolling);
 
   if (background2X < 0){
     backgroundX = -backgroundStep;
@@ -252,7 +250,7 @@ function updateCanvasLeft(){
 
   //context.drawImage(duckImage, currentx,currenty);
 }
-}
+
 
 
 function update(){
