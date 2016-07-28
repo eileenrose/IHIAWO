@@ -1,7 +1,7 @@
 body{
   overflow: hidden;
 }
-canvas {
+.gameWorld, canvas{
     padding: 0;
     margin: auto;
     display: block;
@@ -11,10 +11,23 @@ canvas {
     left: 0;
     right: 0;
 }
+.gameWorld{
+  width: 1000px;
+  height: 400px;
+}
 h1 {
   text-align: center;
   font-size: 100px;
 }
+<<<<<<< HEAD
+.obstacle{
+  position: absolute;
+  right: 0px;
+  bottom: 20px;
+  z-index: 20
+  height:auto;
+  width: 125px;
+=======
 #lifebar{
   position: absolute;
   margin-top: 35px;
@@ -33,4 +46,5 @@ h1 {
   text-align: right;
   border: 1px solid;
   height: 50px;
+>>>>>>> e00ba368563a7e0e65039602d1e501c8bf3f9663
 }
