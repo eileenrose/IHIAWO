@@ -19,7 +19,7 @@ var isRightPressed = false;
 var isLeftPressed = false;
 var delay = 50;
 var codeX;
-
+var mapX = 0;
 
 var lifebar;
 var numLives = 0;
@@ -27,6 +27,7 @@ var numLives = 0;
 var background = new Image();
 var background2 = new Image();
 var duckImage = new Image();
+var obstacleRight = 0;
 
 window.onload = function() {
   canvas = document.getElementById('canvas');
@@ -52,6 +53,7 @@ window.onload = function() {
   setupListeners();
   setupIntervals();
   setuplifeBar();
+  drawObstacles();
 
 }
 
@@ -83,33 +85,49 @@ function setupListeners() {
   document.addEventListener("keydown", keyDownHandler, false); // the next two lines are calling the function. When the keys are pressed
   document.addEventListener("keyup", keyUpHandler, false); //when the keys aren't pressed
 }
-
 function updateCanvasRight(){
   context.clearRect(0,0,canvas.width,canvas.height)
-  backgroundX -= 35;
-  background2X -= 35;
-  if (currentx < 400){
+  //mapX += 35;
+
+  if (currenty > 200 || currentx < 400 && currentx != obstacleRight){ //When the duck gets to the center of image, it stops.
     currentx += 35;
+    if (obstacleRight < 315 || currenty > 200) {
+      obstacleRight += 35;
+      backgroundX -= 35;
+      background2X -= 35;
+    }
   }
+  console.log(currentx);
+  console.log(obstacleRight);
   if (background2X < 0){
     backgroundX = -35;
     background2X = 1788 - 35;
   }
-  codeX -= 2; //makes code move back 
+  codeX -= 2; //makes code move back
   context.drawImage(background, backgroundX, 0)
   context.drawImage(background2, background2X, 0)
   context.drawImage(duckImage, currentx,currenty)
   drawImage(context, codeX  ,0, canvasWidth, canvasHeight);
-}
+  $("#1").css("right", obstacleRight);
 
+}
+function drawObstacles(){
+    if (mapX >= 700){
+      obstacleX = (mapX/2)
+      context.drawImage(duckImage, obstacleX , 200)
+      console.log("the position of the obstacle is " + obstacleX)
+    }
+
+}
 function updateCanvasLeft(){
 
   context.clearRect(0,0,canvas.width,canvas.height)
-  context.drawImage(background, backgroundX, 0)
-  context.drawImage(background2, background2X, 0)
   if (currentx > 0){
     currentx -= 35;
   }
+  context.drawImage(background, backgroundX, 0)
+  context.drawImage(background2, background2X, 0)
+
   context.drawImage(duckImage, currentx,currenty);
 }
 
