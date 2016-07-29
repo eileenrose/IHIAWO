@@ -35,6 +35,7 @@ var recentlyTouchedDoge = false;
 var recentlyTouchedPython = false;
 var recentlyTouchedGoose = false;
 var recentlyTouchedJavascript = false;
+var recentlyTouchedSpike = false;
 
 var background = new Image();
 var background2 = new Image();
@@ -218,6 +219,19 @@ function updateCanvasRight(fasterScrolling){
     }, 10);
 
   }
+
+  if ((currentx + 158) > (spikeX-12) && (currentx + 158) < (spikeX + 250)
+&& currenty >= 200) {
+  if (recentlyTouchedSpike == false){
+    removeLife();
+
+  }
+    currentx += 5;
+    window.setTimeout(function(){
+    recentlyTouchedSpike = true;
+  }, 10);
+
+}
 }
   backgroundX -= (backgroundStep + fasterScrolling);
   background2X -= (backgroundStep + fasterScrolling);

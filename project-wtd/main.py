@@ -19,7 +19,7 @@ class MainHandler(webapp2.RequestHandler):
         if user:
             template = jinja_environment.get_template('startpage.html')
             self.response.out.write(template.render())
-            query = Player.query().order(-Player.score)
+            query = Player.query().order(Player.score)
             player_list = query.fetch()
             for p in player_list:
                 self.response.write('<br><p style="font-size:28px;font-family:verdana;border-style: outset;border-color: purple;border-width: 10px;background-color: yellow;padding: 10px;margin: 20px;">%s: %s</p>' % (p.email, p.score))
@@ -74,16 +74,6 @@ class EndOfLevelHandler(webapp2.RequestHandler):
 
 class GameOverHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if user:
-            email = users.get_current_user().nickname()
-            score = self.request.get('currentScore')
-            player = Player(email=email, score=score)
-            player.put()
-            templateover = jinja_environment.get_template('gameOver.html')
-            self.response.out.write('<h1 style="font-size:48px;">Your score: %s</h1>' % score)
-            self.response.out.write(templateover.render())
-        else:
             score = self.request.get('currentScore')
             templateover = jinja_environment.get_template('gameOver.html')
             self.response.out.write('<h1 style ="font-size:48px;">Your score: %s</h1>' % score)
