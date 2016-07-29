@@ -24,7 +24,6 @@ class MainHandler(webapp2.RequestHandler):
             for p in player_list:
                 self.response.write('<br><p style="font-size:28px;font-family:verdana;border-style: outset;border-color: purple;border-width: 10px;background-color: yellow;padding: 10px;margin: 20px;">%s: %s</p>' % (p.email, p.score))
                 p.put()
-                p.key.delete()
         else:
             template = jinja_environment.get_template('startpagenon.html')
             self.response.out.write(template.render())
