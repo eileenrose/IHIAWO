@@ -24,6 +24,7 @@ class MainHandler(webapp2.RequestHandler):
             for p in player_list:
                 self.response.write('<br><p style="font-size:28px;font-family:verdana;border-style: outset;border-color: purple;border-width: 10px;background-color: yellow;padding: 10px;margin: 20px;">%s: %s</p>' % (p.email, p.score))
                 p.put()
+                p.key.delete()
         else:
             template = jinja_environment.get_template('startpagenon.html')
             self.response.out.write(template.render())
@@ -40,16 +41,6 @@ class SignInHandler(webapp2.RequestHandler):
             self.redirect(users.create_logout_url('/'))
         else:
             self.redirect(users.create_login_url('/'))
-
-class AddScoreHandler(webapp2.RequestHandler):
-    def get(self):
-        name = users.get_current_user().nickname()
-        user = users.get_current_user()
-        score = self.request.get('score')
-        level = self.request.get('level')
-        player = Player(name=name, email=user.nickname(), score=score, level=level)
-        player.put()
-        self.redirect('/')
 
 class InstructionHandler(webapp2.RequestHandler):
     def get(self):
@@ -86,7 +77,6 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/game', GameHandler),
     ('/sign', SignInHandler),
-    ('/add', AddScoreHandler),
     ('/instructions', InstructionHandler),
     ('/end_of_level', EndOfLevelHandler),
     ('/gameOver', GameOverHandler),
